@@ -12,7 +12,8 @@ class Question(models.Model):
 
     # 생성한지 하루 이상이면 True return.
     def was_published_recently(self):
-        return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
+        now = timezone.now()
+        return now - datetime.timedelta(days=1) <= self.pub_date <= now
 
     # 객체 자체를 print 할 경우 실행된다.
     def __str__(self):
