@@ -18,5 +18,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('plagiarism/', include('plagiarism.urls'), name="plagiarism")
+    path('plagiarism/', include('plagiarism.urls'), name="plagiarism"),
+    path('', include('base.urls'), name="base")
 ]
