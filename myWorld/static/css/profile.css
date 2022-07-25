@@ -1,0 +1,25 @@
+.h-red {
+    color: blue;
+}
+
+.profile {
+    padding: 30px;
+    float: left;
+}
+
+#nav-outline {
+    margin: 10px;
+}
+
+.outline {
+    margin: 30px;
+}
+
+.hr-line {
+    margin: 30px;
+    border: solid 3px red;
+}
+
+.qwer {
+    margin: 80px;
+}

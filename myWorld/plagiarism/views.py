@@ -7,6 +7,9 @@ import random
 
 # def index(request):
 #    return HttpResponse("hello world!")
+from rest_framework.renderers import TemplateHTMLRenderer
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 
 class IndexView(generic.TemplateView):
@@ -16,3 +19,11 @@ class IndexView(generic.TemplateView):
         context = super().get_context_data(**kwargs)
         context['number'] = random.randrange(1, 100)
         return context
+
+
+class PlagiarismIndexAPIView(APIView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = "plagiarism/plagiarismIndex.html"
+
+    def get(self, request):
+        return Response()
