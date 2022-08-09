@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TODO</title>
+</head>
+<body>
+    <h1>TODO 목록 앱</h1>
+    <ul>
+        {% for to in todo %}
+            <li>{{ to.title }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
