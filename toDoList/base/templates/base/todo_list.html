@@ -6,9 +6,11 @@
 </head>
 <body>
     <h1>TODO 목록 앱</h1>
+    <a href="{% url 'todo_post' %}">todo 추가</a>
+    <a href="{% url 'todo_done' %}">todo done</a>
     <ul>
         {% for to in todo %}
-            <li>{{ to.title }}</li>
+        <li>{{ to.title }} <a href="{% url 'todo_to_done' pk=to.pk %}">완료</a><a href="{% url 'todo_edit' pk=to.pk %}">수정</a></li>
         {% endfor %}
     </ul>
 </body>
