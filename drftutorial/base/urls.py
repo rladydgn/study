@@ -16,6 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from base.views import testAPI, ss
+
 urlpatterns = [
-    path('', test),
+    path('', testAPI),
+    path('ss/', ss),
 ]
