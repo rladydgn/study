@@ -16,9 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from base.views import testAPI, ss
+from base.views import testAPI, booksAPI, bookAPI
 
 urlpatterns = [
     path('', testAPI),
-    path('ss/', ss),
+    path('books/', booksAPI),
+    path('book/<int:bid>/', bookAPI)
 ]

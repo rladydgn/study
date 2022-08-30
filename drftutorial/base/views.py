@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import status
 from rest_framework.decorators import api_view
@@ -19,7 +19,7 @@ def testAPI(request):
 # 데코레이터, csrf 토큰 검증 비활성화
 @csrf_exempt
 @api_view(['GET', 'POST'])
-def ss(request):
+def booksAPI(request):
     # GET 방식
     if request.method == 'GET':
         # db에 저장된 모든 Book 가져오기
@@ -38,3 +38,11 @@ def ss(request):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET'])
+def bookAPI(request, bid):
+    book = get_object_or_404(Book, bid=bid)
+    # db에서 가져올땐 그냥 book, 클라이언트에게서 받을 땐 data=book
+    serializer = BookSerializer(book)
+    return Response(serializer.data, status=status.HTTP_200_OK)
