@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 #include <map>
-#include <algorithm>
 #include <set>
 
 using namespace std;
@@ -9,6 +8,7 @@ using namespace std;
 set<string> answer;
 
 int main() {
+	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
 	int n, m;
 	
 	map<string, int> q;
