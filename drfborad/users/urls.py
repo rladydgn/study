@@ -17,9 +17,12 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework_simplejwt.views import TokenObtainPairView
 
-from users.views import RegisterAPIView
+from users.views import RegisterAPIView, RegisterView, ProfileAPIView, ProfileView
 
 urlpatterns = [
     path('register/', RegisterAPIView.as_view(), name='register'),
-    path('login/', TokenObtainPairView.as_view(), name='login')
+    path('register2/', RegisterView.as_view(), name='register2'),
+    path('login/', TokenObtainPairView.as_view(), name='login'),
+    path('profile/<pk>/', ProfileAPIView.as_view(), name='profile'),
+    path('profile2/<pk>/', ProfileView.as_view(), name='profile2')
 ]

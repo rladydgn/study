@@ -3,6 +3,8 @@ from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
 
+from users.models import Profile
+
 
 class RegisterSerializer(serializers.ModelSerializer):
     # email 검증. 필수 요소, 유일한지 검증
@@ -13,6 +15,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     # 쓰기전용, 필수요소, password가 적합한지 검증
     password = serializers.CharField(
+        # 역직렬화를 불가능하게.
         write_only=True,
         required=True,
         validators=[validate_password]
@@ -42,6 +45,12 @@ class RegisterSerializer(serializers.ModelSerializer):
         )
         user.save()
         return user
+
+
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = ['nickname', 'position', 'subjects', 'image']
 
 # class RegisterSerializer(serializers.ModelSerializer):
 #     email = serializers.EmailField(
