@@ -1,3 +1,10 @@
+https://www.acmicpc.net/board/view/22716
+
+소수점 자리수 출력
+cout << fixed;
+cout.precision(2);
+2 째 자리 까지 반올림.
+
 & > 해당 변수가 위치한 메모리에 입력값을 넣으라는 의미이다.
 
 scanf(" %c", &name); > %c 앞에 공백을 넣어주는 이유 - 일반적인 자료형의 경우에는 이전에 입력된
