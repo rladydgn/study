@@ -1,0 +1,20 @@
+<nav>
+    <ul class="nav">
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'board:home' %}">home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'board:board_list' %}">게시판</a>
+        </li>
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'account:logout' %}">{{ user.username }}(로그아웃)</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'account:login' %}">로그인</a>
+        </li>
+        <a class="nav-link" href="{% url 'account:signup' %}">회원가입</a>
+        {% endif %}
+    </ul>
+</nav>
