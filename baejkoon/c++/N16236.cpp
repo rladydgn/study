@@ -1,5 +1,6 @@
 #include <iostream>
 #include <queue>
+#include <vector>
 
 using namespace std;
 
@@ -27,16 +28,14 @@ int main() {
                 visited[i][j] = 0;
             }
         }
-        // cout << answer << endl;
-        queue<pair<int, pair<int, int>>> q;
+        priority_queue<pair<int, pair<int, int>>, vector<pair<int, pair<int, int>>>, greater<pair<int, pair<int, int>>>> q;
         q.push({0, {shark_pos[0], shark_pos[1]}});
         visited[shark_pos[0]][shark_pos[1]] = 1;
         arr[shark_pos[0]][shark_pos[1]] = 0;
         bool check = false;
 
         while(!q.empty()) {
-            pair<int, pair<int, int>> p = q.front();
-            // cout << p.first << endl;
+            pair<int, pair<int, int>> p = q.top();
             q.pop();
 
             if(arr[p.second.first][p.second.second] != 0 && arr[p.second.first][p.second.second] < shark_size) {
