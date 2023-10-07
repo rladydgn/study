@@ -2,5 +2,6 @@
 using namespace std;
 
 int main() {
-    cout << "hello";
+    int arr[10][10] = {0,};
+    cout << arr[5][5];
 }
