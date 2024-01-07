@@ -1,37 +1,37 @@
 package org.example;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Calculator {
     ArrayList<String> delimiters;
-    String rawInput;
     String extractedCustomDelimiterInput;
-    Calculator(String input) {
+    Calculator() {
         delimiters = new ArrayList<>();
         delimiters.add(",");
         delimiters.add(":");
-        this.rawInput = input;
-        extractCustomDelimiter();
     }
 
-    void extractCustomDelimiter() {
-        if(isCustomDelimiter(rawInput)) {
-            delimiters.add(Character.toString(rawInput.charAt(2)));
-            extractedCustomDelimiterInput = rawInput.substring(5);
+    private void extractCustomDelimiter(String input) {
+        Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(input);
+        if(matcher.find()) {
+            delimiters.add(matcher.group(1));
+            extractedCustomDelimiterInput = matcher.group(2);
             return;
         }
-        extractedCustomDelimiterInput = rawInput;
+        extractedCustomDelimiterInput = input;
     }
 
-    boolean isCustomDelimiter(String rawPrefix) {
-        if(rawPrefix.substring(0, 2).equals("//") && rawPrefix.substring(3, 5).equals("\\n")) return true;
-        return false;
-    }
+    public int calculate(String input) {
+        if(isInputNullOrEmpty(input)) return 0;
 
-    public int calculate() {
-        String delimiterRegex = createRegex();
+        extractCustomDelimiter(input);
+
+        String delimiterRegex = createSplitRegex();
         String[] values = extractedCustomDelimiterInput.split(delimiterRegex);
         int sum = 0;
+
         for(String stringValue: values) {
             int value = Integer.parseInt(stringValue);
             if(value < 0) throw new RuntimeException("음수는 계산할 수 없습니다.");
@@ -40,10 +40,15 @@ public class Calculator {
         return sum;
     }
 
-    String createRegex() {
+    private String createSplitRegex() {
         String delimiterRegex = "[";
         for(String customDelimiter: this.delimiters) delimiterRegex += customDelimiter;
         delimiterRegex += "]";
         return delimiterRegex;
+    }
+
+    static boolean isInputNullOrEmpty(String input) {
+        if(input == null || input.isEmpty()) return true;
+        return false;
     }
 }
