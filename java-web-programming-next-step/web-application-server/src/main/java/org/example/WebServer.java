@@ -22,7 +22,8 @@ public class WebServer {
 
             Socket connection;
             while((connection = listenSocket.accept()) != null) {
-
+                RequestHandler requestHandler = new RequestHandler(connection);
+                requestHandler.start();
             }
         }
     }
