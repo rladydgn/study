@@ -3,7 +3,7 @@ package org.example.chapter2;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AppleMain {
+public class AppleFirst {
 
     public static void prettyPrintApple(List<Apple> inventory, ApplePrint applePrint) {
         for(Apple apple: inventory) {
@@ -23,22 +23,6 @@ public class AppleMain {
         // 인터페이스를 사용해 다양한 출력방식을 선택할 수 있다.
         prettyPrintApple(apples, new AppleSimplePrint());
         prettyPrintApple(apples, new AppleTextPrint());
-    }
-}
-
-class Apple {
-    int weight;
-
-    public Apple(int weight) {
-        this.weight = weight;
-    }
-
-    public int getWeight() {
-        return weight;
-    }
-
-    public void setWeight(int weight) {
-        this.weight = weight;
     }
 }
 
