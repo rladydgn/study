@@ -1,4 +1,4 @@
-package tobyspring.hellospring;
+package tobyspring.hellospring.exrate;
 
 import java.io.BufferedReader;
 import java.io.IOException;
