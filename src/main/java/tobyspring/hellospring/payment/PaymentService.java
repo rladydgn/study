@@ -6,8 +6,6 @@ import java.time.LocalDateTime;
 
 import org.springframework.stereotype.Component;
 
-import tobyspring.hellospring.exrate.ExRateProvider;
-
 @Component
 public class PaymentService {
 	private final ExRateProvider exRateProvider;

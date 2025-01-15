@@ -10,6 +10,8 @@ import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import tobyspring.hellospring.payment.ExRateProvider;
+
 public class WebApiExRateProvider implements ExRateProvider {
 	@Override
 	public BigDecimal getExRate(String currency) throws IOException {
