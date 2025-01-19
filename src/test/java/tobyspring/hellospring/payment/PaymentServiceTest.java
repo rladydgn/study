@@ -8,11 +8,17 @@ import java.math.BigDecimal;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.test.context.ContextConfiguration;
 
 import tobyspring.hellospring.TestObjectFactory;
 
+@ContextConfiguration(classes = TestObjectFactory.class)
 class PaymentServiceTest {
+
+	@Autowired
+	BeanFactory beanFactory;
 
 	@Test
 	@DisplayName("prepare 메서드가 요구사항 3가지를 잘 충족했는지 검증")
