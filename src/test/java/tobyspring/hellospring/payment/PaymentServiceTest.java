@@ -21,13 +21,11 @@ import tobyspring.hellospring.TestObjectFactory;
 class PaymentServiceTest {
 
 	@Autowired
-	BeanFactory beanFactory;
+	PaymentService paymentService;
 
 	@Test
 	@DisplayName("prepare 메서드가 요구사항 3가지를 잘 충족했는지 검증")
 	void convertedAmount() throws IOException {
-		PaymentService paymentService = beanFactory.getBean(PaymentService.class);
-
 		Payment payment = paymentService.prepare(1L, "USD", BigDecimal.TEN);
 
 		// 환율정보 가져오기
