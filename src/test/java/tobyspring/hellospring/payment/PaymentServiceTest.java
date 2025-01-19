@@ -5,9 +5,7 @@ import static org.assertj.core.api.Assertions.*;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.Clock;
-import java.time.Instant;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -26,6 +24,8 @@ class PaymentServiceTest {
 	PaymentService paymentService;
 	@Autowired
 	ExRateProviderStub exRateProviderStub;
+	@Autowired
+	Clock clock;
 
 	@Test
 	@DisplayName("prepare 메서드가 요구사항 3가지를 잘 충족했는지 검증")
@@ -50,9 +50,7 @@ class PaymentServiceTest {
 	@Test
 	@DisplayName("원화 환산 금액 유효시간 계산")
 	void validUntil() throws IOException {
-		Clock clock = Clock.fixed(Instant.now(), ZoneId.systemDefault());
-		PaymentService paymentService1 = new PaymentService(exRateProviderStub, clock);
-		Payment payment = paymentService1.prepare(1L, "USD", BigDecimal.TEN);
+		Payment payment = paymentService.prepare(1L, "USD", BigDecimal.TEN);
 
 		LocalDateTime now = LocalDateTime.now(clock);
 		LocalDateTime expectedValidUntil = now.plusMinutes(30);
