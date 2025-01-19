@@ -27,8 +27,8 @@ class PaymentServiceTest {
 		Payment payment = paymentService.prepare(1L, "USD", BigDecimal.TEN);
 
 		// 환율정보 가져오기
-		assertThat(payment.getExRate()).isEqualTo(exRate);
+		assertThat(payment.getExRate()).isEqualByComparingTo(exRate);
 		// 원화 환산 금액 계산
-		assertThat(payment.getConvertedAmount()).isEqualTo(convertedAmount);
+		assertThat(payment.getConvertedAmount()).isEqualByComparingTo(convertedAmount);
 	}
 }
