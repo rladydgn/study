@@ -7,13 +7,16 @@ import java.math.BigDecimal;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import tobyspring.hellospring.TestObjectFactory;
 
+@ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = TestObjectFactory.class)
 class PaymentServiceTest {
 
@@ -23,7 +26,6 @@ class PaymentServiceTest {
 	@Test
 	@DisplayName("prepare 메서드가 요구사항 3가지를 잘 충족했는지 검증")
 	void convertedAmount() throws IOException {
-		BeanFactory beanFactory = new AnnotationConfigApplicationContext(TestObjectFactory.class);
 		PaymentService paymentService = beanFactory.getBean(PaymentService.class);
 
 		Payment payment = paymentService.prepare(1L, "USD", BigDecimal.TEN);
