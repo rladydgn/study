@@ -4,6 +4,10 @@ import static org.assertj.core.api.Assertions.*;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.time.Clock;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -41,9 +45,17 @@ class PaymentServiceTest {
 		// 원화 환산 금액 계산
 		assertThat(payment2.getConvertedAmount()).isEqualByComparingTo(BigDecimal.valueOf(5000));
 
-		// 원화 환산 금액 유효시간 계산
-		// assertThat(payment.getValidUntil()).isAfter(LocalDateTime.now());
-		// assertThat(payment.getValidUntil()).isBefore(LocalDateTime.now().plusMinutes(30));
+	}
 
+	@Test
+	@DisplayName("원화 환산 금액 유효시간 계산")
+	void validUntil() throws IOException {
+		Clock clock = Clock.fixed(Instant.now(), ZoneId.systemDefault());
+		PaymentService paymentService1 = new PaymentService(exRateProviderStub, clock);
+		Payment payment = paymentService1.prepare(1L, "USD", BigDecimal.TEN);
+
+		LocalDateTime now = LocalDateTime.now(clock);
+		LocalDateTime expectedValidUntil = now.plusMinutes(30);
+		assertThat(payment.getValidUntil()).isEqualTo(expectedValidUntil);
 	}
 }
