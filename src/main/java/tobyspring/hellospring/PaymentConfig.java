@@ -6,6 +6,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import tobyspring.hellospring.api.ApiTemplate;
+import tobyspring.hellospring.api.ErApiExRateExtractor;
+import tobyspring.hellospring.api.SimpleApiExecutor;
 import tobyspring.hellospring.exrate.CachedExRateProvider;
 import tobyspring.hellospring.exrate.WebApiExRateProvider;
 import tobyspring.hellospring.payment.ExRateProvider;
@@ -35,6 +37,6 @@ public class PaymentConfig {
 
 	@Bean
 	public ApiTemplate apiTemplate() {
-		return new ApiTemplate();
+		return new ApiTemplate(new SimpleApiExecutor(), new ErApiExRateExtractor());
 	}
 }
