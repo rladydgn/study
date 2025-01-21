@@ -9,6 +9,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import tobyspring.hellospring.api.ApiExecutor;
+import tobyspring.hellospring.api.ErApiExRateExtractor;
 import tobyspring.hellospring.api.ExRateExtractor;
 import tobyspring.hellospring.api.SimpleApiExecutor;
 import tobyspring.hellospring.payment.ExRateProvider;
@@ -20,12 +21,7 @@ public class WebApiExRateProvider implements ExRateProvider {
 
 		// 콜백
 		// runApiForExRate(url, uri -> {});
-		return runApiForExRate(url, new SimpleApiExecutor(), response -> {
-			ObjectMapper mapper = new ObjectMapper();
-			ExRateDate data = mapper.readValue(response, ExRateDate.class);
-			System.out.println("API ExRate: " + data.rates().get("KRW"));
-			return data.rates().get("KRW");
-		});
+		return runApiForExRate(url, new SimpleApiExecutor(), new ErApiExRateExtractor());
 	}
 
 	// 템플릿
