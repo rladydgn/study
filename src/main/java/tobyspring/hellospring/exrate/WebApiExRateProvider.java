@@ -9,6 +9,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import tobyspring.hellospring.api.ApiExecutor;
+import tobyspring.hellospring.api.ExRateExtractor;
 import tobyspring.hellospring.api.SimpleApiExecutor;
 import tobyspring.hellospring.payment.ExRateProvider;
 
@@ -19,11 +20,16 @@ public class WebApiExRateProvider implements ExRateProvider {
 
 		// 콜백
 		// runApiForExRate(url, uri -> {});
-		return runApiForExRate(url, new SimpleApiExecutor());
+		return runApiForExRate(url, new SimpleApiExecutor(), response -> {
+			ObjectMapper mapper = new ObjectMapper();
+			ExRateDate data = mapper.readValue(response, ExRateDate.class);
+			System.out.println("API ExRate: " + data.rates().get("KRW"));
+			return data.rates().get("KRW");
+		});
 	}
 
 	// 템플릿
-	private static BigDecimal runApiForExRate(String url, ApiExecutor apiExecutor) {
+	private static BigDecimal runApiForExRate(String url, ApiExecutor apiExecutor, ExRateExtractor exRateExtractor) {
 		URI uri;
 		try {
 			uri = new URI(url);
@@ -39,16 +45,9 @@ public class WebApiExRateProvider implements ExRateProvider {
 		}
 
 		try {
-			return extractExRate(response);
+			return exRateExtractor.extract(response);
 		} catch (JsonProcessingException e) {
 			throw new RuntimeException(e);
 		}
-	}
-
-	private static BigDecimal extractExRate(String response) throws JsonProcessingException {
-		ObjectMapper mapper = new ObjectMapper();
-		ExRateDate data = mapper.readValue(response, ExRateDate.class);
-		System.out.println("API ExRate: " + data.rates().get("KRW"));
-		return data.rates().get("KRW");
 	}
 }
