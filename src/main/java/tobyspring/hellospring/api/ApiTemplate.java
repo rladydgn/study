@@ -8,7 +8,27 @@ import java.net.URISyntaxException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 public class ApiTemplate {
-	public BigDecimal getExRate(String url, ApiExecutor apiExecutor, ExRateExtractor exRateExtractor) {
+	private final ApiExecutor apiExecutor;
+	private final ExRateExtractor exRateExtractor;
+
+	public ApiTemplate() {
+		this.apiExecutor = new HttpClientApiExecutor();
+		this.exRateExtractor = new ErApiExRateExtractor();
+	}
+
+	public BigDecimal getForExRate(String url) {
+		return getForExRate(url, apiExecutor, exRateExtractor);
+	}
+
+	public BigDecimal getForExRate(String url, ApiExecutor apiExecutor) {
+		return getForExRate(url, apiExecutor, exRateExtractor);
+	}
+
+	public BigDecimal getForExRate(String url, ExRateExtractor exRateExtractor) {
+		return getForExRate(url, apiExecutor, exRateExtractor);
+	}
+
+	public BigDecimal getForExRate(String url, ApiExecutor apiExecutor, ExRateExtractor exRateExtractor) {
 		URI uri;
 		try {
 			uri = new URI(url);
