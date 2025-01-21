@@ -4,6 +4,7 @@ import java.time.Clock;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.client.JdkClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
 import tobyspring.hellospring.api.ApiTemplate;
@@ -39,6 +40,8 @@ public class PaymentConfig {
 
 	@Bean
 	public RestTemplate restTemplate() {
-		return new RestTemplate();
+		// 생성자에서 전략을 직접 넣어줄 수 있다.
+		// return new RestTemplate();
+		return new RestTemplate(new JdkClientHttpRequestFactory());
 	}
 }
