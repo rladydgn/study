@@ -8,6 +8,7 @@ import java.net.URISyntaxException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import tobyspring.hellospring.api.ApiExecutor;
 import tobyspring.hellospring.api.SimpleApiExecutor;
 import tobyspring.hellospring.payment.ExRateProvider;
 
@@ -16,10 +17,13 @@ public class WebApiExRateProvider implements ExRateProvider {
 	public BigDecimal getExRate(String currency) {
 		String url = "https://open.er-api.com/v6/latest/" + currency;
 
-		return runApiForExRate(url);
+		// 콜백
+		// runApiForExRate(url, uri -> {});
+		return runApiForExRate(url, new SimpleApiExecutor());
 	}
 
-	private static BigDecimal runApiForExRate(String url) {
+	// 템플릿
+	private static BigDecimal runApiForExRate(String url, ApiExecutor apiExecutor) {
 		URI uri;
 		try {
 			uri = new URI(url);
@@ -29,7 +33,7 @@ public class WebApiExRateProvider implements ExRateProvider {
 
 		String response;
 		try {
-			response = new SimpleApiExecutor().execute(uri);
+			response = apiExecutor.execute(uri);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
