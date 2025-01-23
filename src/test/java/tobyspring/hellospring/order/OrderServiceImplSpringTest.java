@@ -18,7 +18,7 @@ import tobyspring.hellospring.OrderConfig;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = OrderConfig.class)
-public class OrderServiceSpringTest {
+public class OrderServiceImplSpringTest {
 	@Autowired
 	OrderService orderService;
 	@Autowired
