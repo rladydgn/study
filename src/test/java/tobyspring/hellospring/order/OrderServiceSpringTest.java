@@ -58,6 +58,6 @@ public class OrderServiceSpringTest {
 		// 예외 발생시 롤백 되었는지 확인
 		JdbcClient client = JdbcClient.create(dataSource);
 		Long count = client.sql("select count(*) from orders where orderNumber = '0200'").query(Long.class).single();
-		Assertions.assertThat(count).isEqualTo(1);
+		Assertions.assertThat(count).isEqualTo(0);
 	}
 }

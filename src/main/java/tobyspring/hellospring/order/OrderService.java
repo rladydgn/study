@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.support.TransactionTemplate;
 
 @Service
 public class OrderService {
@@ -24,6 +25,8 @@ public class OrderService {
 	}
 
 	public List<Order> createOrders(List<OrderReq> reqs) {
-		return reqs.stream().map(req -> createOrder(req.orderNumber(), req.total())).toList();
+		return new TransactionTemplate(transactionManager).execute(status ->
+			reqs.stream().map(req -> createOrder(req.orderNumber(), req.total())).toList()
+		);
 	}
 }
