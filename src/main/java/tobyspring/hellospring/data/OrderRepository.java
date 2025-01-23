@@ -19,8 +19,9 @@ public class OrderRepository {
 
 		try {
 			em.persist(order);
+			em.flush(); // 바로 db 에 요청
 
-			transaction.commit();
+			transaction.commit(); // rollbackException
 		} catch (RuntimeException e) {
 			if (transaction.isActive()) {
 				transaction.rollback();
