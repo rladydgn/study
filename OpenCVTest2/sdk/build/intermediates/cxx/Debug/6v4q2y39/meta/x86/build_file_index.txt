@@ -1,0 +1,1 @@
+C:\Users\SnapTagRND\AndroidStudioProjects\OpenCVTest2\sdk\libcxx_helper\CMakeLists.txt

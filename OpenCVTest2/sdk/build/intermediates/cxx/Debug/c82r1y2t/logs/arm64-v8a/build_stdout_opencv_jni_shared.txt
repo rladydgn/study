@@ -1,0 +1,2 @@
+ninja: Entering directory `C:\Users\dhdgn\Desktop\snaptag-main\OpenCVTest2\sdk\.cxx\Debug\c82r1y2t\arm64-v8a'
+ninja: no work to do.

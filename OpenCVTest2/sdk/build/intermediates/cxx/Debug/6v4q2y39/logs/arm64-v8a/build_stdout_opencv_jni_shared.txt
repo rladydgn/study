@@ -1,0 +1,2 @@
+ninja: Entering directory `C:\Users\SnapTagRND\AndroidStudioProjects\OpenCVTest2\sdk\.cxx\Debug\6v4q2y39\arm64-v8a'
+ninja: no work to do.
