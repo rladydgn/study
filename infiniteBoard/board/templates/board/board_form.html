@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+{% if form %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">저장하기</button>
+    </form>
+{% endif %}
+{% endblock %}
