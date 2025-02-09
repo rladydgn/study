@@ -1,2 +1,1 @@
-# study
-각종 공부 모음
+https://github.com/tobyspringboot/hellospring
